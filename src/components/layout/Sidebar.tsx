@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, Send, History, Settings } from 'lucide-react';
+import { LayoutDashboard, Package, Send, History, Settings, Rocket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const menuItems = [
@@ -7,6 +7,11 @@ const menuItems = [
     title: 'Dashboard',
     icon: LayoutDashboard,
     href: '/',
+  },
+  {
+    title: 'Vehicles',
+    icon: Rocket,
+    href: '/vehicles',
   },
   {
     title: 'Inventory',
