@@ -114,7 +114,7 @@ export const Dashboard = () => {
           </DialogHeader>
           {selectedResource && (
             <div className="py-2">
-              <ResourceCard resource={selectedResource} initialCollapsed={false} />
+              <ResourceCard resource={selectedResource} collapsible={false} initialCollapsed={false} />
             </div>
           )}
           <DialogFooter>

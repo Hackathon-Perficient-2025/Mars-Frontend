@@ -10,6 +10,7 @@ import { useState } from 'react';
 interface ResourceCardProps {
   resource: Resource;
   initialCollapsed: boolean;
+  collapsible?: boolean;
 }
 
 const iconMap = {
@@ -24,7 +25,7 @@ const iconMap = {
   ChevronUp,
 };
 
-export const ResourceCard = ({ resource, initialCollapsed }: ResourceCardProps) => {
+export const ResourceCard = ({ resource, initialCollapsed, collapsible = true }: ResourceCardProps) => {
   const [collapsed, setCollapsed] = useState(initialCollapsed);
 
   const status = getResourceStatus(resource);
@@ -55,9 +56,9 @@ export const ResourceCard = ({ resource, initialCollapsed }: ResourceCardProps) 
           <CardTitle className="text-sm font-medium">{resource.name}</CardTitle>
           <ResourceIcon className="h-5 w-5 text-muted-foreground" />
         </div>
-        <button onClick={() => setCollapsed(!collapsed)}>
+        {collapsible && <button onClick={() => setCollapsed(!collapsed)}>
           <CollapseIcon />
-        </button>
+        </button>}
       </CardHeader>
       {!collapsed ? <CardContent>
         <div className="space-y-3">
