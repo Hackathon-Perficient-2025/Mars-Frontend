@@ -3,18 +3,20 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Html } from '@react-three/drei';
 import { RoverModel } from './RoverModel';
 import { RealRoverModel } from './RealRoverModel';
-import { useRover } from '@/hooks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Battery, Thermometer, Activity, Wifi, Navigation, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+import type { RoverStatus } from '@/types/rover.types';
+
 interface RoverSceneProps {
     mode?: 'standard' | 'real';
+    rover: RoverStatus;
+    isConnecting?: boolean;
 }
 
-export const RoverScene = ({ mode = 'standard' }: RoverSceneProps) => {
-    const { rover, isConnecting } = useRover();
+export const RoverScene = ({ mode = 'standard', rover, isConnecting = false }: RoverSceneProps) => {
     const [selectedPart, setSelectedPart] = useState<string | null>(null);
 
     return (

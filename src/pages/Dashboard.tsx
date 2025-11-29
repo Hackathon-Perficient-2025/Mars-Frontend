@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import type { Resource } from '@/types';
 import { RoverScene } from '@/components/rover';
-import { useResources, useAlerts, useResupply } from '@/hooks';
+import { useResources, useAlerts, useResupply, useRovers } from '@/hooks';
 import { LoadingSpinner } from '@/components/common';
 import { toast } from 'sonner';
 
@@ -13,6 +13,7 @@ export const Dashboard = () => {
   const { resources, isLoading, refreshResources } = useResources();
   const { alerts, acknowledgeAlert } = useAlerts();
   const { createRequest } = useResupply();
+  const { rovers, isConnecting: isRoverConnecting } = useRovers();
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
 
   const handleUrgentResupply = async () => {
@@ -87,7 +88,7 @@ export const Dashboard = () => {
       </div>
 
       <div className="grid gap-6">
-        <RoverScene />
+        <RoverScene rover={rovers[0]} isConnecting={isRoverConnecting} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
