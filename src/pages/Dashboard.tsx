@@ -67,8 +67,8 @@ export const Dashboard = () => {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {resources.map((resource) => (
-          <ResourceCard key={resource.id} resource={resource} />
+        {resources.map((resource, index) => (
+          <ResourceCard key={resource.id} resource={resource} initialCollapsed={index >= 3} />
         ))}
       </div>
 
