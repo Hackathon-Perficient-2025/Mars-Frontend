@@ -82,7 +82,7 @@ export const Dashboard = () => {
         </div>
 
         {resources.map((resource) => (
-          <ResourceCard key={resource.id} resource={resource} />
+          <ResourceCard key={resource.id} resource={resource} initialCollapsed={false} />
         ))}
       </div>
 
@@ -114,7 +114,7 @@ export const Dashboard = () => {
           </DialogHeader>
           {selectedResource && (
             <div className="py-2">
-              <ResourceCard resource={selectedResource} />
+              <ResourceCard resource={selectedResource} collapsible={false} initialCollapsed={false} />
             </div>
           )}
           <DialogFooter>

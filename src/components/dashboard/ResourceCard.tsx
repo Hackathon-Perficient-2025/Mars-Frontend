@@ -3,11 +3,14 @@ import { Progress } from '@/components/ui/progress';
 import { StatusBadge } from '@/components/common';
 import type { Resource } from '@/types';
 import { formatResourceLevel, formatPercentage, formatDaysRemaining } from '@/utils';
-import { Wind, Droplet, UtensilsCrossed, Wrench, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { Wind, Droplet, UtensilsCrossed, Wrench, TrendingUp, TrendingDown, Minus, ChevronDown, ChevronUp } from 'lucide-react';
 import { getResourceStatus } from '@/mocks';
+import { useState } from 'react';
 
 interface ResourceCardProps {
   resource: Resource;
+  initialCollapsed: boolean;
+  collapsible?: boolean;
 }
 
 const iconMap = {
@@ -18,20 +21,26 @@ const iconMap = {
   TrendingUp,
   TrendingDown,
   Minus,
+  ChevronDown,
+  ChevronUp,
 };
 
-export const ResourceCard = ({ resource }: ResourceCardProps) => {
+export const ResourceCard = ({ resource, initialCollapsed, collapsible = true }: ResourceCardProps) => {
+  const [collapsed, setCollapsed] = useState(initialCollapsed);
+
   const status = getResourceStatus(resource);
   const percentage = (resource.currentLevel / resource.maxCapacity) * 100;
 
   const ResourceIcon = resource.type === 'oxygen' ? iconMap.Wind
     : resource.type === 'water' ? iconMap.Droplet
-    : resource.type === 'food' ? iconMap.UtensilsCrossed
-    : iconMap.Wrench;
+      : resource.type === 'food' ? iconMap.UtensilsCrossed
+        : iconMap.Wrench;
 
   const TrendIcon = resource.trend === 'increasing' ? iconMap.TrendingUp
     : resource.trend === 'decreasing' ? iconMap.TrendingDown
-    : iconMap.Minus;
+      : iconMap.Minus;
+
+  const CollapseIcon = collapsed ? iconMap.ChevronDown : iconMap.ChevronUp;
 
   const getProgressColor = () => {
     if (status === 'critical') return 'bg-red-500';
@@ -43,10 +52,15 @@ export const ResourceCard = ({ resource }: ResourceCardProps) => {
   return (
     <Card className="transition-all hover:shadow-lg">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{resource.name}</CardTitle>
-        <ResourceIcon className="h-5 w-5 text-muted-foreground" />
+        <div className='flex flex-row items-center gap-x-2'>
+          <CardTitle className="text-sm font-medium">{resource.name}</CardTitle>
+          <ResourceIcon className="h-5 w-5 text-muted-foreground" />
+        </div>
+        {collapsible && <button onClick={() => setCollapsed(!collapsed)}>
+          <CollapseIcon />
+        </button>}
       </CardHeader>
-      <CardContent>
+      {!collapsed ? <CardContent>
         <div className="space-y-3">
           <div className="flex items-end justify-between">
             <div>
@@ -79,6 +93,9 @@ export const ResourceCard = ({ resource }: ResourceCardProps) => {
           </div>
         </div>
       </CardContent>
+        : <div className='text-2xl font-bold px-6'>{
+          formatResourceLevel(resource.currentLevel, resource.unit)
+        }</div>}
     </Card>
   );
 };
