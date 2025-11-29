@@ -74,6 +74,23 @@ export const ResupplyRequests = () => {
     }
   };
 
+  const resourceLabelMap: Record<ResourceType, string> = {
+    oxygen: 'Oxygen',
+    water: 'Water',
+    food: 'Food',
+    spare_parts: 'Spare Parts',
+    trees: 'Standing Trees / Plants',
+    solar_robots: 'Solar Robots',
+    energy_storage: 'Energy Storage',
+    medical_supplies: 'Medical Supplies',
+    sewage_capacity: 'Sewage & Waste Processing',
+    arable_land: 'Arable Land',
+    pollinators: 'Pollinators',
+    freshwater_aquifer: 'Freshwater Aquifers',
+    batteries: 'Mobile Batteries',
+    population: 'Human Population',
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -115,6 +132,16 @@ export const ResupplyRequests = () => {
                       <SelectItem value="water">Water</SelectItem>
                       <SelectItem value="food">Food</SelectItem>
                       <SelectItem value="spare_parts">Spare Parts</SelectItem>
+                      <SelectItem value="trees">Standing Trees / Plants</SelectItem>
+                      <SelectItem value="solar_robots">Solar Robots</SelectItem>
+                      <SelectItem value="energy_storage">Energy Storage</SelectItem>
+                      <SelectItem value="medical_supplies">Medical Supplies</SelectItem>
+                      <SelectItem value="sewage_capacity">Sewage & Waste Processing</SelectItem>
+                      <SelectItem value="arable_land">Arable Land</SelectItem>
+                      <SelectItem value="pollinators">Pollinators</SelectItem>
+                      <SelectItem value="freshwater_aquifer">Freshwater Aquifers</SelectItem>
+                      <SelectItem value="batteries">Mobile Batteries</SelectItem>
+                      <SelectItem value="population">Human Population</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -188,7 +215,7 @@ export const ResupplyRequests = () => {
               {requests.map((request) => (
                 <TableRow key={request.id}>
                   <TableCell className="font-medium capitalize">
-                    {request.resourceType.replace('_', ' ')}
+                    {resourceLabelMap[request.resourceType] ?? request.resourceType.replace('_', ' ')}
                   </TableCell>
                   <TableCell>{request.quantity.toLocaleString()}</TableCell>
                   <TableCell>
