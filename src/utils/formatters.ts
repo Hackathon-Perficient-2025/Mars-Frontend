@@ -18,21 +18,32 @@ export const formatRelativeTime = (date: Date): string => {
   return formatDistanceToNow(date, { addSuffix: true });
 };
 
-export const formatDaysRemaining = (days?: number): string => {
-  if (!days) return 'N/A';
+export const formatDaysRemaining = (days?: number | null): string => {
+  if (days === null || days === undefined) return 'N/A';
   if (days < 1) return 'Less than 1 day';
   if (days === 1) return '1 day';
   return `${Math.floor(days)} days`;
 };
 
 export const getResourceIcon = (type: ResourceType): string => {
-  const icons = {
+  const icons: Record<ResourceType, string> = {
     oxygen: 'Wind',
     water: 'Droplet',
     food: 'UtensilsCrossed',
     spare_parts: 'Wrench',
+    trees: 'TreePine',
+    solar_robots: 'Bot',
+    energy_storage: 'Battery',
+    medical_supplies: 'Heart',
+    sewage_capacity: 'Pipette',
+    arable_land: 'Sprout',
+    pollinators: 'Bug',
+    freshwater_aquifer: 'Waves',
+    batteries: 'BatteryCharging',
+    population: 'Users',
   };
-  return icons[type];
+
+  return icons[type] ?? 'Circle';
 };
 
 export const getStatusText = (resource: Resource): string => {
