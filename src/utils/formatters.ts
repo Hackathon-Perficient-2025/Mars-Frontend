@@ -42,7 +42,8 @@ export const getResourceIcon = (type: ResourceType): string => {
     batteries: 'BatteryCharging',
     population: 'Users',
   };
-  return icons[type];
+
+  return icons[type] ?? 'Circle';
 };
 
 export const getStatusText = (resource: Resource): string => {
