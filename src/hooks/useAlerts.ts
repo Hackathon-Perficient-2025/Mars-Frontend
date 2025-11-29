@@ -1,11 +1,9 @@
 import { useState, useCallback } from 'react';
-import { Alert } from '@/types';
+import type { Alert } from '@/types';
 import { MOCK_ALERTS } from '@/mocks';
 
 export const useAlerts = () => {
   const [alerts, setAlerts] = useState<Alert[]>(MOCK_ALERTS);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const acknowledgeAlert = useCallback((alertId: string) => {
     setAlerts(prevAlerts =>
@@ -32,8 +30,6 @@ export const useAlerts = () => {
 
   return {
     alerts,
-    isLoading,
-    error,
     acknowledgeAlert,
     addAlert,
     clearAcknowledged,

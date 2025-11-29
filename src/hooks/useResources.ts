@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Resource } from '@/types';
+import type { Resource } from '@/types';
 import { MOCK_RESOURCES } from '@/mocks';
 import { REFRESH_INTERVAL } from '@/utils';
 

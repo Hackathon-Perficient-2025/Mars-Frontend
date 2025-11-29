@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { StatusBadge } from '@/components/common';
-import { Resource } from '@/types';
-import { formatResourceLevel, formatPercentage, formatDaysRemaining, getTrendIcon } from '@/utils';
+import type { Resource } from '@/types';
+import { formatResourceLevel, formatPercentage, formatDaysRemaining } from '@/utils';
 import { Wind, Droplet, UtensilsCrossed, Wrench, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { getResourceStatus } from '@/mocks';
 

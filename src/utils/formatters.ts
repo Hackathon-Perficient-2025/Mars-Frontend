@@ -1,5 +1,5 @@
 import { format, formatDistanceToNow } from 'date-fns';
-import { Resource, ResourceType } from '@/types';
+import type { Resource, ResourceType } from '@/types';
 
 export const formatResourceLevel = (level: number, unit: string): string => {
   return `${level.toLocaleString()} ${unit}`;

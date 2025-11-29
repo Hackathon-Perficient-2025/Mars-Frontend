@@ -1,4 +1,4 @@
-import { ResupplyRequest, ResupplyPriority, ResupplyStatus } from '@/types';
+import type { ResupplyRequest, ResupplyPriority, ResupplyStatus } from '@/types';
 import { subDays, addDays } from 'date-fns';
 
 export const MOCK_RESUPPLY_REQUESTS: ResupplyRequest[] = [

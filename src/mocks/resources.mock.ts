@@ -1,4 +1,4 @@
-import { Resource, ResourceHistory, ResourceType } from '@/types';
+import type { Resource, ResourceHistory, ResourceType } from '@/types';
 import { subHours, subDays } from 'date-fns';
 
 export const MOCK_RESOURCES: Resource[] = [

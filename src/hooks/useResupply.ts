@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { ResupplyRequest, CreateResupplyRequest } from '@/types';
+import type { ResupplyRequest, CreateResupplyRequest } from '@/types';
 import { MOCK_RESUPPLY_REQUESTS, createResupplyRequest } from '@/mocks';
 
 export const useResupply = () => {

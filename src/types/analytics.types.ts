@@ -1,4 +1,4 @@
-import { ResourceType } from './resource.types';
+import type { ResourceType } from './resource.types';
 
 export interface TimeSeriesData {
   timestamp: Date;

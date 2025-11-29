@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
-import { ResourceHistory, ResourceType } from '@/types';
+import type { ResourceHistory, ResourceType } from '@/types';
 import { format } from 'date-fns';
 
 interface ResourceChartProps {

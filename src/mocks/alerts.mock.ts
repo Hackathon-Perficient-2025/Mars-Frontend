@@ -1,4 +1,4 @@
-import { Alert, AlertLevel } from '@/types';
+import type { Alert, AlertLevel } from '@/types';
 import { subHours, subDays } from 'date-fns';
 
 export const MOCK_ALERTS: Alert[] = [

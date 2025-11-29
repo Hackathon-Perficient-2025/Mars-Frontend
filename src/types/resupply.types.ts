@@ -1,4 +1,4 @@
-import { ResourceType } from './resource.types';
+import type { ResourceType } from './resource.types';
 
 export type ResupplyPriority = 'urgent' | 'high' | 'normal';
 export type ResupplyStatus = 'pending' | 'approved' | 'in_transit' | 'delivered' | 'cancelled';
