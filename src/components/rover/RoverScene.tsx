@@ -1,14 +1,19 @@
 import { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
+import { OrbitControls, Environment, ContactShadows, Html } from '@react-three/drei';
 import { RoverModel } from './RoverModel';
+import { RealRoverModel } from './RealRoverModel';
 import { useRover } from '@/hooks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Battery, Thermometer, Activity, Wifi, Navigation, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export const RoverScene = () => {
+interface RoverSceneProps {
+    mode?: 'standard' | 'real';
+}
+
+export const RoverScene = ({ mode = 'standard' }: RoverSceneProps) => {
     const { rover, isConnecting } = useRover();
     const [selectedPart, setSelectedPart] = useState<string | null>(null);
 
@@ -37,7 +42,20 @@ export const RoverScene = () => {
                             <ambientLight intensity={0.5} />
                             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
 
-                            <RoverModel status={rover} onPartClick={setSelectedPart} />
+                            {mode === 'standard' ? (
+                                <RoverModel status={rover} onPartClick={setSelectedPart} />
+                            ) : (
+                                <ErrorBoundary fallback={
+                                    <Html center>
+                                        <div className="bg-destructive/90 text-destructive-foreground p-4 rounded-lg shadow-lg max-w-sm text-center backdrop-blur-sm border border-destructive/50">
+                                            <h3 className="font-bold text-lg">Model Load Error</h3>
+                                            <p className="text-sm mt-2">Could not load /models/rover.glb</p>
+                                        </div>
+                                    </Html>
+                                }>
+                                    <RealRoverModel onPartClick={setSelectedPart} />
+                                </ErrorBoundary>
+                            )}
 
                             <ContactShadows position={[0, 0, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
                             <OrbitControls
@@ -131,3 +149,21 @@ export const RoverScene = () => {
         </Card>
     );
 };
+
+// Simple Error Boundary for the 3D model part
+import React from 'react';
+class ErrorBoundary extends React.Component<{ fallback: React.ReactNode, children: React.ReactNode }, { hasError: boolean }> {
+    constructor(props: any) {
+        super(props);
+        this.state = { hasError: false };
+    }
+    static getDerivedStateFromError(_error: any) {
+        return { hasError: true };
+    }
+    render() {
+        if (this.state.hasError) {
+            return this.props.fallback;
+        }
+        return this.props.children;
+    }
+}

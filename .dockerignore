@@ -1,6 +1,6 @@
 # Dependencies
 node_modules
-pnpm-lock.yaml
+# pnpm-lock.yaml is needed for pnpm install in Docker builds
 npm-debug.log
 yarn-error.log
 
